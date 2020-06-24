@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p class="display-3">Vue Crash Course</p>
+                <p class="display-3">Vue TODO LIST</p>
             </div>
         </div>
         <div class="row">
@@ -14,6 +14,9 @@
                     <Todo v-for="(todo, index) in todos" :key="index"
                         :todoString="todo.todoString"
                         :completed="todo.completed"
+                        @on-delete="deleteTodo(todo)"
+                        @on-toggle="toggleTodo(todo)"
+                        @on-edit="editTodo(todo,$event)"
                      />
                 </ul>
             </div>
@@ -60,5 +63,4 @@ export default {
 </script>
 
 <style>
-
 </style>
