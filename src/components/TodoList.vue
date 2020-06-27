@@ -37,15 +37,10 @@ export default {
         NewTodo
     },
     data(){
+        let localTodo=JSON.parse(localStorage.getItem('todoList'));
+        console.log(localTodo);
         return{
-            todos:[
-                {todoString: "Wake Early", completed:true},
-                {todoString: "Learn Cooking", completed:false},
-                {todoString: "Do Competitive Coding", completed:true},
-                {todoString: "Start Investment", completed:false},
-                {todoString: "Eat Healthy", completed:false},
-                {todoString: "Complete GoLang", completed:true}
-            ]
+            todos:localTodo
         };
     },
     methods:{
@@ -54,15 +49,27 @@ export default {
                 todoString: newTodo,
                 completed:false
             });
+            localStorage.setItem('todoList',JSON.stringify(this.todos));
         },
-        toggleTodo(todo){
-            todo.completed=!todo.completed;
+        toggleTodo(changeTodo){
+            for(var todo in this.todos){
+                if(this.todos[todo].todoString===changeTodo.todoString){
+                    changeTodo.completed=!changeTodo.completed;
+                }
+            }
+            localStorage.setItem('todoList',JSON.stringify(this.todos));
         },
-        editTodo(todo,newTodoString){
-            todo.todoString=newTodoString;
+        editTodo(changeTodo,newTodoString){
+            for(var todo in this.todos){
+                if(this.todos[todo].todoString===changeTodo.todoString){
+                    changeTodo.todoString=newTodoString;
+                }
+            }
+            localStorage.setItem('todoList',JSON.stringify(this.todos));
         },
         deleteTodo(deleteTodo){
             this.todos=this.todos.filter(todo => todo.todoString !== deleteTodo.todoString);
+            localStorage.setItem('todoList',JSON.stringify(this.todos));
         }
     }
 }
