@@ -37,7 +37,8 @@ export default {
         NewTodo
     },
     data(){
-        let localTodo=JSON.parse(localStorage.getItem('todoList'));
+        let localTodo=[];
+        localTodo=JSON.parse(localStorage.getItem('todoList'));
         console.log(localTodo);
         return{
             todos:localTodo
